@@ -13,7 +13,7 @@ const origine = [
 	{
 		id: 2,
 		output: 2,
-		text: "Autre commune : préciser nom de la commune : _________",
+		text: "Autre commune : ",
 	},
 ];
 const modeTransport = [

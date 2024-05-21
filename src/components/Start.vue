@@ -26,27 +26,31 @@
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
-		<div id="q2" v-if="level === 3 && Q1 === 1 || level === 3 && Q1 > 2">
+		<div id="q2" v-if="level === 3 && Q1 !== 2">
 			<h3>D’où êtes-vous parti pour arriver à la gare?</h3>
-
 			<select v-model="Q2" class="form-control">
 				<option v-for="option in origine" :key="option.id" :value="option.output">
 					{{ option.text }}
 				</option>
 			</select>
-			<div v-if="Q2 === 2">
+			<div><br><br></div>
+			<div v-if="Q2 === 1">
+				<h2>De quelle rue de Poitiers venez-vous?</h2>
+				<br>
 				<h2>Si le répondant ne sait pas ou ne veut pas répondre - remplir « NSP » et passer à la question
 					suivante.
 					La réponse « centre-ville » est acceptée à défaut de quelque chose de plus précis.</h2>
-				<input class="form-control" type="text" v-model="Q2a" placeholder="Precisions">
-
+				<input class="form-control" type="text" v-model="Q2a"
+					placeholder="Nom de la rue où se situe le point d’origine du déplacement :">
 			</div>
+			<input v-if="Q2 === 2" class="form-control" type="text" v-model="Q2_Autre"
+				placeholder="préciser nom de la commune :">
 
-			<button v-if="Q2 === 1 || Q2 === 2 && Q2a" @click="next" class="btn-next">Suivant</button>
+			<button v-if="Q2 === 1 && Q2a || Q2 === 2 && Q2_Autre" @click="next" class="btn-next">Suivant</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
-		<div id="q3" v-if="level === 4 && Q1 === 1 || level === 4 && Q1 > 2">
+		<div id="q3" v-if="level === 4 && Q1 !== 2">
 			<h2>Quel mode de transport avez-vous utilisé pour vous rendre à la gare ?</h2>
 			<select v-model="Q3" class="form-control">
 				<option v-for="option in modeTransport" :key="option.id" :value="option.output">
@@ -59,7 +63,7 @@
 		</div>
 
 
-		<div id="q3a" v-if="level === 5 && Q1 === 1 && Q3 === 2 || level === 5 && Q1 > 2 && Q3 === 2">
+		<div id="q3a" v-if="level === 5 && Q1 !== 2 && Q3 === 2">
 			<h2>Où avez-vous stationné votre voiture?</h2>
 			<select v-model="Q3a" class="form-control">
 				<option v-for="option in stationnement" :key="option.id" :value="option.output">
@@ -76,7 +80,7 @@
 		</div>
 
 
-		<div id="q3b" v-if="level === 5 && Q1 === 1 && Q3 === 3 || level === 5 && Q1 > 2 && Q3 === 3">
+		<div id="q3b" v-if="level === 5 && Q1 !== 2 && Q3 === 3">
 			<h2>Où vous êtes-vous fait déposer ?</h2>
 			<select v-model="Q3b" class="form-control">
 				<option v-for="option in depose" :key="option.id" :value="option.output">
@@ -88,7 +92,7 @@
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
-		<div id="q3c" v-if="level === 5 && Q1 === 1 && Q3 === 4 || level === 5 && Q1 > 2 && Q3 === 4">
+		<div id="q3c" v-if="level === 5 && Q1 !== 2 && Q3 === 4">
 			<h2>Quelle ligne de bus avez-vous emprunté?</h2>
 			<select v-model="Q3c" class="form-control">
 				<option v-for="option in ligneBus" :key="option.id" :value="option.output">
@@ -100,8 +104,7 @@
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
-		<div id="q3d"
-			v-if="level === 5 && Q1 === 1 && (Q3 === 5 || Q3 === 6 || Q3 === 7) || level === 5 && Q1 > 2 && (Q3 === 5 || Q3 === 6 || Q3 === 7)">
+		<div id="q3d" v-if="level === 5 && Q1 !== 2 && (Q3 === 5 || Q3 === 6 || Q3 === 7)">
 			<h2>Où avez-vous stationné votre vélo/trottinette?</h2>
 			<select v-model="Q3d" class="form-control">
 				<option v-for="option in stationnementTrotinette" :key="option.id" :value="option.output">
@@ -113,7 +116,7 @@
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
-		<div id="q3e" v-if="level === 5 && Q1 === 1 && Q3 === 1 || level === 5 && Q1 > 2 && Q3 === 1">
+		<div id="q3e" v-if="level === 5 && Q1 !== 2 && Q3 === 1">
 			<h2>Par où avez-vous accédé à la gare?</h2>
 			<select v-model="Q3e" class="form-control">
 				<option v-for="option in accesGare" :key="option.id" :value="option.output">
@@ -126,7 +129,7 @@
 		</div>
 
 		<div id="q4"
-			v-if="(level === 5 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 5 && Q1 > 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10))">
+			v-if="(level === 5 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 6 && Q1 !== 2 && Q3 < 8)">
 			<h2>Par où avez-vous/allez-vous accéder aux quais pour prendre votre train ?</h2>
 			<select v-model="Q4" class="form-control">
 				<option v-for="option in accesQuai" :key="option.id" :value="option.output">
@@ -138,7 +141,7 @@
 		</div>
 
 		<div id="q5"
-			v-if="(level === 6 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 7 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 6 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 7 && Q1 !== 2 && Q3 < 8)">
 			<h2>Pour ce trajet en train, quelle sera votre gare de descente ? </h2>
 			<h2>Précisez que l’on demande la gare de descente même si celle-ci sera une gare de correspondance vers
 				la destination finale.</h2>
@@ -154,7 +157,7 @@
 		</div>
 
 		<div id="q6"
-			v-if="(level === 7 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 8 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 7 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 8 && Q1 !== 2 && Q3 < 8)">
 			<h2>Quel est le motif de votre déplacement?</h2>
 			<select v-model="Q6" class="form-control">
 				<option v-for="option in motif" :key="option.id" :value="option.output">
@@ -167,7 +170,7 @@
 		</div>
 
 		<div id="q6a"
-			v-if="(level === 8 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 9 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 8 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 9 && Q1 !== 2 && Q3 < 8)">
 			<h2>Quel était la raison de votre venue à Poitiers ?</h2>
 			<select v-model="Q6a" class="form-control">
 				<option v-for="option in raisonVenue" :key="option.id" :value="option.output">
@@ -180,7 +183,7 @@
 		</div>
 
 		<div id="q7"
-			v-if="(level === 9 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 10 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 9 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 10 && Q1 !== 2 && Q3 < 8)">
 			<h2>A quelle fréquence réalisez-vous ce déplacement en train?</h2>
 			<select v-model="Q7" class="form-control">
 				<option v-for="option in frequence" :key="option.id" :value="option.output">
@@ -192,7 +195,7 @@
 		</div>
 
 		<div id="q8"
-			v-if="(level === 10 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 11 && Q1 === 1 && Q3 < 8) || level === 6 && Q1 > 2">
+			v-if="(level === 10 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 11 && Q1 !== 2 && Q3 < 8)">
 			<h2>Quel âge avez-vous ?</h2>
 			<select v-model="Q8" class="form-control">
 				<option v-for="option in age" :key="option.id" :value="option.output">
@@ -204,7 +207,7 @@
 		</div>
 
 		<div id="q9"
-			v-if="(level === 11 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 12 && Q1 === 1 && Q3 < 8) || level === 7 && Q1 > 2">
+			v-if="(level === 11 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 12 && Q1 !== 2 && Q3 < 8)">
 			<h3>Selon vous, que faudrait-il faire en priorité pour améliorer les conditions d’accès à cette gare ?</h3>
 			<h2>Si besoin orienter vers :<br>
 				1: Sentiment des voyageurs sur les différentes infrastructures (souterrains, passerelle, quais…)<br>
@@ -216,7 +219,7 @@
 		</div>
 
 		<div id="fin"
-			v-if="level === 3 && Q1 === 2 || (level === 12 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 13 && Q1 === 1 && Q3 < 8) || level === 8 && Q1 > 2">
+			v-if="level === 3 && Q1 === 2 || (level === 12 && Q1 !== 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 13 && Q1 !== 2 && Q3 < 8)">
 			<h2>Merci pour votre réponse et bon voyage.</h2>
 			<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
 			<button @click="back" class="btn-return">retour</button>
@@ -248,6 +251,7 @@ const ENQUETEUR = ref('');
 const Q1 = ref('');
 const Q2 = ref('');
 const Q2a = ref('');
+const Q2_Autre = ref('');
 const Q3 = ref('');
 const Q3_DETAIL = ref('');
 const Q3a = ref('');
@@ -310,6 +314,7 @@ const submitSurvey = async () => {
 		Q1: Q1.value,
 		Q2: Q2.value,
 		Q2a: Q2a.value,
+		Q2_Autre: Q2_Autre.value,
 		Q3: Q3.value,
 		Q3_DETAIL: Q3_DETAIL.value,
 		Q3a: Q3a.value,
@@ -339,6 +344,7 @@ const submitSurvey = async () => {
 	Q1.value = "";
 	Q2.value = "";
 	Q2a.value = "";
+	Q2_Autre.value = "";
 	Q3.value = "";
 	Q3_DETAIL.value = "";
 	Q3a.value = "";
@@ -382,6 +388,7 @@ const downloadData = async () => {
 			Q1: "Q1",
 			Q2: "Q2",
 			Q2a: "Q2a",
+			Q2_Autre: "Q2_Autre",
 			Q3: "Q3",
 			Q3_DETAIL: "Q3_DETAIL",
 			Q3a: "Q3a",
@@ -423,6 +430,7 @@ const downloadData = async () => {
 				Q1: docData.Q1 || "",
 				Q2: docData.Q2 || "",
 				Q2a: docData.Q2a || "",
+				Q2_Autre: docData.Q2_Autre || "",
 				Q3: docData.Q3 || "",
 				Q3_DETAIL: docData.Q3_DETAIL || "",
 				Q3a: docData.Q3a || "",
