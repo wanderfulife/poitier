@@ -1,359 +1,295 @@
-const nbPersArret = [
-	{ id: 1, output: "<5", text: "< 5" },
-	{ id: 2, output: "5-15", text: "5 – 15" },
-	{ id: 3, output: ">15", text: "> 15" },
-];
-
-const OptionsTransport = [
-	{ id: 1, output: "FlixBus", text: "FlixBus" },
-	{ id: 2, output: "BlablacarOuibus", text: "Blablacar / Ouibus" },
-	{ id: 3, output: "Flibco", text: "Flibco (pour les aéroports) // For the airport" },
-	{ id: 4, output: "Autre", text: "Autre (préciser) // Other" },
-];
-
-const modesDeplacement = [
-	{
-		id: 1,
-		output: "Marche",
-		text: "En marchant (au moins 5 min si avec un autre mode de déplacement) // Walking",
-	},
-	{ id: 2, output: "Vélo perso", text: "À vélo personnel // Biking" },
+const raison = [
+	{ id: 1, output: 1, text: "Je vais prendre le train" },
+	{ id: 2, output: 2, text: "Je viens de descendre du train" },
 	{
 		id: 3,
-		output: "Vélo partagé",
-		text: "À vélo partagé (VLille, Tier, Lime) // Shared bike",
+		output: 3,
+		text: "J’accompagne des voyageurs qui partent / J’attends des voyageurs qui arrivent",
 	},
+	{ id: 4, output: 4, text: "Autre raison (achat billet, commerces en gare…)" },
+];
+const origine = [
+	{ id: 3, output: 3, text: "Poitiers" },
 	{
 		id: 4,
-		output: "Trottinette perso",
-		text: "À trottinette personnelle // Personnal scooter",
+		output: 4,
+		text: "Autre commune : préciser nom de la commune : _________",
 	},
+];
+const modeTransport = [
+	{ id: 1, output: 1, text: "A pied" },
+	{ id: 2, output: 2, text: "En voiture – conducteur" },
+	{ id: 3, output: 3, text: "En voiture – passager" },
+	{ id: 4, output: 4, text: "En bus/car" },
+	{ id: 5, output: 5, text: "A vélo" },
+	{ id: 6, output: 6, text: "A vélo à assistance électrique (VAE)" },
+	{ id: 7, output: 7, text: "En trottinette" },
+	{ id: 8, output: 8, text: "En Taxi/VTC" },
+	{ id: 9, output: 9, text: "En train - je fais une correspondance" },
+	{ id: 10, output: 10, text: "Autre : préciser : _________" },
+];
+const stationnement = [
+	{ id: 1, output: 1, text: "Dans le parking Toumaï" },
+	{ id: 2, output: 2, text: "Dans le parking Effia" },
+	{
+		id: 3,
+		output: 3,
+		text: "Dans le parking horodateur Maillochon côté Boivre",
+	},
+	{ id: 4, output: 4, text: "Dans le Parking Horodateur Grand Cerf" },
 	{
 		id: 5,
-		output: "Transports",
-		text: "En transports en commun urbains (métro, tram, bus urbains…) // Public transports",
-	},
-	{ id: 6, output: "Autocar", text: "En autocar (FlixBus, BlaBlaCar…)" },
-	{ id: 7, output: "Train", text: "En train (TGV, TER, Intercités…)" },
-	{
-		id: 8,
-		output: "Conducteur",
-		text: "En voiture en tant que conduct·eur·rice // By car, Driving",
+		output: 5,
+		text: "Sur une autre place en voirie : préciser nom voirie : _________",
 	},
 	{
-		id: 9,
-		output: "Passager",
-		text: "En voiture en tant que passag·er·ère // By car, Passenger",
+		id: 6,
+		output: 6,
+		text: "Dans un autre parking : préciser nom : _________",
 	},
 	{
-		id: 10,
-		output: "Déposé par proche",
-		text: "J’ai été déposé par un proche // Dropped by a relative",
+		id: 7,
+		output: 7,
+		text: "Sur un stationnement privé (box ou place de parking privée)",
 	},
-	{
-		id: 11,
-		output: "Covoiturage",
-		text: "C’était un covoiturage formel (via une plateforme type BlaBlaCar) // Carpooling",
-	},
-	{ id: 12, output: "Autre", text: "Autre (préciser) // Other" },
 ];
-
-const passagere1 = [
+const depose = [
 	{
 		id: 1,
-		output: "Déposé par proche",
-		text: "J’ai été déposé par un proche // Dropped by a relative",
+		output: 1,
+		text: "Dans l’arrêt minute au 1er étage du parking Toumaï",
 	},
-	{
-		id: 2,
-		output: "Covoiturage",
-		text: "C’était un covoiturage formel (via une plateforme type BlaBlaCar) // Carpooling",
-	},
-];
-
-const passagere2 = [
-	{
-		id: 1,
-		output: "Stationnement",
-		text: "Stationné sa voiture dans les environs // Parked your car nearby",
-	},
-	{
-		id: 2,
-		output: "Dépôt arrêt minute",
-		text: "Déposé ses passagers en réalisant un arrêt minute // Dropped off his passengers by making a minute stop",
-	},
-];
-
-const motifsDeplacement = [
-	{ id: 1, output: "Rentrer", text: "Rentrer chez vous // Go home" },
-	{
-		id: 2,
-		output: "Visite proches",
-		text: "Visite à des proches // Visit to relatives",
-	},
+	{ id: 2, output: 2, text: "Sur le parvis devant le bâtiment voyageurs" },
 	{
 		id: 3,
-		output: "Vacances / Loisirs",
-		text: "Vacances / Loisirs // Holidays ",
+		output: 3,
+		text: "Sur les boulevards à proximité de la gare (Grand Cerf, Solferino, Pont Achard…)",
 	},
 	{
 		id: 4,
-		output: "Logement occasionnel",
-		text: "Rejoindre un logement occasionnel // occasional accommodation",
+		output: 4,
+		text: "Sur la rue ou le parking horodateur Maillochon côté Boivre",
 	},
+	{ id: 5, output: 5, text: "Autre : préciser : _________" },
+];
+const ligneBus = [
+	{ id: 1, output: 1, text: "Ligne 1 (arrêt sur le viaduc Leon Blum)" },
+	{ id: 2, output: 2, text: "Ligne 2, 2A ou 2B (devant le bâtiment voyageur)" },
+	{ id: 3, output: 3, text: "Ligne 1E (devant le bâtiment voyageur)" },
+	{ id: 4, output: 4, text: "Ligne O (devant le bâtiment voyageur)" },
+	{ id: 5, output: 5, text: "Ligne 11 (arrêt sur le viaduc Leon Blum)" },
+	{ id: 6, output: 6, text: "Ligne 13 (devant le bâtiment voyageur)" },
+	{ id: 7, output: 7, text: "Ligne 16 (arrêt sur le viaduc Leon Blum)" },
+	{ id: 8, output: 8, text: "Ligne 20 (arrêt sur le viaduc Leon Blum)" },
+	{ id: 9, output: 9, text: "Ligne 21 (devant le bâtiment voyageur)" },
+	{ id: 10, output: 10, text: "Ligne 33 ou 33E (arrêt dans gare routière)" },
+	{ id: 11, output: 11, text: "Ligne 35 (arrêt dans gare routière)" },
+	{ id: 12, output: 12, text: "Ligne 36 (arrêt dans gare routière)" },
+	{
+		id: 13,
+		output: 13,
+		text: "Ligne régionale 100 (arrêt dans gare routière)",
+	},
+	{
+		id: 14,
+		output: 14,
+		text: "Ligne régionale 101 (arrêt dans gare routière)",
+	},
+	{
+		id: 15,
+		output: 15,
+		text: "Ligne régionale 111 (arrêt dans gare routière)",
+	},
+	{
+		id: 16,
+		output: 16,
+		text: "Ligne régionale 112 (arrêt dans gare routière)",
+	},
+	{
+		id: 17,
+		output: 17,
+		text: "Ligne régionale 113 (arrêt dans gare routière)",
+	},
+	{
+		id: 18,
+		output: 18,
+		text: "Ligne régionale 114 (arrêt dans gare routière)",
+	},
+	{
+		id: 19,
+		output: 19,
+		text: "Ligne régionale 126 (arrêt dans gare routière)",
+	},
+	{
+		id: 20,
+		output: 20,
+		text: "Ligne régionale 240 (arrêt dans gare routière)",
+	},
+	{
+		id: 21,
+		output: 21,
+		text: "Ligne régionale 241 (arrêt dans gare routière)",
+	},
+	{ id: 22, output: 22, text: "Car scolaire (arrêt dans gare routière)" },
+	{
+		id: 23,
+		output: 23,
+		text: "Flixbus ou BlaBlaBus (arrêt dans gare routière)",
+	},
+	{ id: 24, output: 24, text: "Autre : préciser : _________" },
+];
+const stationnementTrotinette = [
+	{
+		id: 1,
+		output: 1,
+		text: "Sur les arceaux devant le bâtiment voyageur (parvis et ses abords)",
+	},
+	{ id: 2, output: 2, text: "Dans les consignes vélo du parking Toumaï" },
+	{
+		id: 3,
+		output: 3,
+		text: "Dans les box à côté de l’accès à la passerelle côté Maillochon à l’ouest",
+	},
+	{ id: 4, output: 4, text: "Je le transporte avec moi dans le train" },
+	{ id: 5, output: 5, text: "Autre : préciser : _________" },
+];
+const accesGare = [
+	{
+		id: 1,
+		output: 1,
+		text: "Par le bâtiment voyageur à l’est (niveau parvis)",
+	},
+	{
+		id: 2,
+		output: 2,
+		text: "Par le niveau +1 du bâtiment voyageur depuis le centre-ville à l’est",
+	},
+	{
+		id: 3,
+		output: 3,
+		text: "Par la passerelle depuis l’ouest côté Maillochon",
+	},
+	{
+		id: 4,
+		output: 4,
+		text: "Par le viaduc Leon Blum et via le parking Toumaï au Nord",
+	},
+	{ id: 5, output: 5, text: "Autre : préciser : _________" },
+];
+const accesQuai = [
+	{ id: 1, output: 1, text: "Par la passerelle" },
+	{
+		id: 2,
+		output: 2,
+		text: "Par le passage souterrain dans le bâtiment voyageur",
+	},
+];
+const motif = [
+	{ id: 1, output: 1, text: "Je me rends sur mon lieu de travail" },
+	{ id: 2, output: 2, text: "Je me rends sur mon lieu d’études" },
+	{ id: 3, output: 3, text: "Je rentre à mon domicile principal" },
+	{ id: 4, output: 4, text: "Déplacement professionnel" },
+	{ id: 5, output: 5, text: "Loisirs, tourisme" },
+	{
+		id: 6,
+		output: 6,
+		text: "Autres, préciser (Achats, démarches administratives, RDV médical…) : _______",
+	},
+];
+const raisonVenue = [
+	{ id: 1, output: 1, text: "Mon lieu de travail se situe à Poitiers" },
+	{ id: 2, output: 2, text: "Mon lieu d’études se situe à Poitiers" },
+	{ id: 3, output: 3, text: "Je suis venu pour un déplacement professionnel" },
+	{ id: 4, output: 4, text: "Loisirs, tourisme" },
 	{
 		id: 5,
-		output: "Déplacement professionnel",
-		text: "Déplacement professionnel // Business trip",
+		output: 5,
+		text: "Autres (Achats, démarches administratives, RDV médical, visite…)",
 	},
-	{ id: 6, output: "Autre", text: "Autre (préciser) // Other" },
 ];
-
-const raisonsDeplacement = [
+const frequence = [
 	{
 		id: 1,
-		output: "Visite proches",
-		text: "Visite à des proches // Visit to relatives",
+		output: 1,
+		text: "Tous les jours de la semaine ou presque (Plus de 3 fois par semaine)",
 	},
-	{
-		id: 2,
-		output: "Vacances / Loisirs",
-		text: "Vacances / Loisirs // Holidays",
-	},
-	{
-		id: 3,
-		output: "Logement occasionnel",
-		text: "Rejoindre un logement occasionnel // occasional accommodation",
-	},
-	{
-		id: 4,
-		output: "Déplacement professionnel",
-		text: "Déplacement professionnel // Business Trip",
-	},
-	{ id: 5, output: "Autre", text: "Autre (préciser) // Other" },
+	{ id: 2, output: 2, text: "Régulièrement (au moins une fois par mois)" },
+	{ id: 3, output: 3, text: "Occasionnellement (moins d’une fois par mois)" },
 ];
-
-const paysOptions = [
-	{ id: 1, output: "France", text: "France" },
-	{ id: 2, output: "Belgique", text: "Belgique" },
-	{ id: 3, output: "Pays Bas", text: "Pays Bas" },
-	{ id: 4, output: "Allemagne", text: "Allemagne" },
-	{ id: 5, output: "Royaume uni", text: "Royaume uni" },
-	{ id: 6, output: "Autre", text: "Autre (préciser) // Other" },
+const age = [
+	{ id: 1, output: 1, text: "Moins de 18 ans" },
+	{ id: 2, output: 2, text: "Entre 18 et 30 ans" },
+	{ id: 3, output: 3, text: "Entre 30 et 40 ans" },
+	{ id: 4, output: 4, text: "Entre 40 et 55 ans" },
+	{ id: 5, output: 5, text: "Entre 55 et 65 ans" },
+	{ id: 6, output: 6, text: "Plus de 65 ans" },
 ];
-
-const lieuxFrance = [
-	{ id: 1, output: "Aéroport", text: "Aéroport" },
-	{
-		id: 2,
-		output: "Paris / Région parisienne",
-		text: "Paris / Région parisienne",
-	},
-	{ id: 3, output: "Hauts-de-France", text: "Hauts-de-France" },
-	{ id: 4, output: "Autre", text: "Autre // Other" },
-];
-
-
-const lieuxBelgique = [
-	{ id: 1, output: "Aéroport", text: "Aéroport // Airport" },
-	{
-		id: 2,
-		output: "Hors aéroport",
-		text: "Hors aéroport // Outside Airport",
-	},
-];
-
-const frequenceDeplacement = [
-	{
-		id: 1,
-		output: "Première fois",
-		text: "C’est la première fois // 1st Time",
-	},
-	{ id: 2, output: "1 fois par semaine", text: "Au moins 1 fois par semaine // At least once a week" },
-	{ id: 3, output: "1 fois par mois", text: "Au moins 1 fois par mois // At least once a month" },
-	{ id: 4, output: "Plusieurs fois par an", text: "Plusieurs fois par an // Multiple times a year" },
-	{ id: 5, output: "Moins d’1 fois par an", text: "Moins d’1 fois par an // Less than once a year" },
-];
-
-const frequences = [
-	{
-		id: 1,
-		output: "Première fois",
-		text: "C’est la première fois // 1st Time",
-	},
-	{
-		id: 2,
-		output: "1 fois par semaine",
-		text: "Au moins 1 fois par semaine // At least once a week",
-	},
-	{
-		id: 3,
-		output: "1 fois par mois",
-		text: "Au moins 1 fois par mois // At least once a month",
-	},
-	{
-		id: 4,
-		output: "Plusieurs fois par an",
-		text: "Plusieurs fois par an // Multiple times a year",
-	},
-	{
-		id: 5,
-		output: "Moins d’1 fois par an",
-		text: "Moins d’1 fois par an // Less than once a year",
-	},
-];
-
-const motifsVoyage = [
-	{
-		id: 1,
-		output: "professionnel",
-		text: "Déplacement professionnel // Business trip",
-	},
-	{
-		id: 2,
-		output: "Visite à des proches",
-		text: "Visite à des proches // Visit relatives",
-	},
-	{
-		id: 3,
-		output: "Vacances / Loisirs",
-		text: "Vacances / Loisirs // Holidays",
-	},
-	{
-		id: 4,
-		output: "Logement occasionnel",
-		text: "Rejoindre un logement occasionnel // occasional accommodation",
-	},
-	{ id: 5, output: "Autre", text: "Autre (préciser) // Other" },
-];
-
-const amenagementsArretsBus = [
-	{
-		id: 1,
-		output: "Abris voyageur grands et confortables",
-		text: "Des « abris voyageur » suffisamment grands et confortables au plus près des cars // “traveler shelters” ",
-	},
-	{
-		id: 2,
-		output: "Parvis avec places assises",
-		text: "Un vaste parvis à proximité des arrêts de cars avec des places assises vous permettant de vous isoler des autres voyageurs",
-	},
-	{
-		id: 3,
-		output: "Parvis avec places assises",
-		text: "A large square near the car stops with seats allowing you to isolate yourself from other travelers",
-	},
-	{
-		id: 4,
-		output: "Espace d’attente intérieur chauffé",
-		text: "Un espace d’attente en intérieur chauffé mais possiblement un peu éloigné des cars // A heated indoor waiting area",
-	},
-];
-
-const informationsArretsBus = [
-	{
-		id: 1,
-		output: "Écrans d'information temps réel",
-		text: "Des Écrans d’information « temps réel » sur les départs et les arrivées // “Real-time” information screens on departures and arrivals",
-	},
-	{
-		id: 2,
-		output: "Annonces sonores départs et arrivées",
-		text: "Des Annonces sonores sur les départs et les arrivées // Audible announcements on departures and arrivals",
-	},
-	{
-		id: 3,
-		output: "Affichage fiches horaires",
-		text: "Un affichage des fiches horaires théoriques // A display of theoretical time sheets",
-	},
-];
-const securiteArretsBus = [
-	{
-		id: 1,
-		output: "Vidéosurveillance",
-		text: "Vidéosurveillance // Video surveillance",
-	},
-	{
-		id: 2,
-		output: "Présence humaine",
-		text: "Une présence humaine // A human presence",
-	},
-	{
-		id: 3,
-		output: "Espace bien éclairé",
-		text: "Un espace bien éclairé visible c’est suffisant // A well-lit, visible space is sufficient",
-	},
-];
-
-const optionsGenre = [
-	{ id: 1, output: "Homme", text: "Un homme // man" },
-	{ id: 2, output: "Femme", text: "Une femme // Woman" },
-	{
-		id: 3,
-		output: "Ne souhaite pas répondre",
-		text: "Je ne souhaite pas répondre // I don't want to say",
-	},
-];
-
-const tranchesAge = [
-	{ id: 1, output: "15/17 ans", text: "15/17 ans" },
-	{ id: 2, output: "18/29 ans", text: "18/29 ans" },
-	{ id: 3, output: "30/44 ans", text: "30/44 ans" },
-	{ id: 4, output: "45/59 ans", text: "45/59 ans" },
-	{ id: 5, output: "60/74 ans", text: "60/74 ans" },
-	{ id: 6, output: "75 ans et plus", text: "75 ans et plus" },
-];
-
-const categoriesProfessionnelles = [
-	{ id: 1, output: "Agriculteur·rice", text: "Agriculteur·rice // Farmer" },
-	{
-		id: 2,
-		output: "Artisan·ne, commerçant·e, chef·fe d’entreprise",
-		text: "Artisan·ne, commerçant·e, chef·fe d’entreprise // Artisan, trader, business manager",
-	},
-	{
-		id: 3,
-		output: "Cadre, profession intellectuelle supérieure",
-		text: "Cadre, profession intellectuelle supérieure // Executive, higher intellectual profession",
-	},
-	{
-		id: 4,
-		output: "Profession intermédiaire",
-		text: "Profession intermédiaire // Intermediate occupation",
-	},
-	{ id: 5, output: "Employé·e", text: "Employé·e // Employee" },
-	{ id: 6, output: "Ouvrier·e", text: "Ouvrier·e // Worker" },
-	{ id: 7, output: "Etudiant·e", text: "Etudiant·e // Student" },
-	{
-		id: 8,
-		output: "Sans activité professionnelle",
-		text: "Sans activité professionnelle // No activity",
-	},
-	{ id: 9, output: "Retraité·e", text: "Retraité·e // Retired" },
-	{ id: 10, output: "Autre", text: "Autre (préciser) // Other" },
+const gare = [
+	"Aigrefeuille-Le Thou",
+	"Anché-Voulon",
+	"Angoulême",
+	"Bellac",
+	"Bordeaux Saint-Jean",
+	"Chalais",
+	"Chasseneuil-du-Poitou",
+	"Châtellerault",
+	"Coutras",
+	"Dangé-Saint-Romain",
+	"Dissay",
+	"Epanvilliers",
+	"Futuroscope",
+	"Ingrandes sur Vienne",
+	"Iteuil",
+	"Jaunay-Clan",
+	"La Crèche",
+	"La Jarrie",
+	"La Mothe-Saint-Héray",
+	"La Rochelle",
+	"La Tricherie",
+	"Lathus",
+	"Le Dorat",
+	"Les Eglisottes",
+	"Les Oremes",
+	"Libourne",
+	"Ligugé",
+	"Limoges Bénédictins",
+	"Lusignan",
+	"Lussac-les-Châteaux",
+	"Luxé",
+	"Maillé",
+	"Massy TGV",
+	"Mauzé",
+	"Mignaloux-Nouaillé",
+	"Montmoreau",
+	"Montmorillon",
+	"Monts",
+	"Naintré Les Barres",
+	"Nantiat",
+	"Nerpuy",
+	"Nieul",
+	"Niort",
+	"Pamproux",
+	"Paris Montparnasse",
+	"Peyrilhac-Saint-Jouvent",
+	"Port-de-Piles",
+	"Prin-Deyrançon",
+	"Rouillé",
+	"Ruffec",
+	"Saint-Aigulin - La Roche-Calais",
+	"Saint-Denis-de-Pile",
+	"Sainte-Maure-Noyant",
+	"Saint-Maixent-L'Ecole",
+	"Saint-Pierre-Des-Corps",
+	"Saint-Saviol",
+	"St-Benoît",
+	"Surgères",
+	"Tours",
+	"Vaulry",
+	"Vayres",
+	"Vendôme-Villiers-Sur-Loir TGV",
+	"Villeperdue",
+	"Vivonne",
 ];
 
 
-
-
-export {
-	nbPersArret,
-	OptionsTransport,
-	modesDeplacement,
-	passagere1,
-	passagere2,
-	motifsDeplacement,
-	raisonsDeplacement,
-	paysOptions,
-	lieuxFrance,
-	lieuxBelgique,
-	frequenceDeplacement,
-	frequences,
-	motifsVoyage,
-	amenagementsArretsBus,
-	informationsArretsBus,
-	securiteArretsBus,
-	optionsGenre,
-	tranchesAge,
-	categoriesProfessionnelles,
-};
+export { raison, origine, modeTransport, stationnement, depose, ligneBus, stationnementTrotinette, accesGare, accesQuai, motif, raisonVenue, frequence, age, gare};

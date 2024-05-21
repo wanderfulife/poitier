@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { } from "./reponses";
+import { raison, origine, modeTransport, stationnement, depose, ligneBus, stationnementTrotinette, accesGare, accesQuai, motif, raisonVenue, frequence, age, gare } from "./reponses";
 import GareSelector from "./GareSelector.vue";
 import CommuneSelector from './CommuneSelector.vue';
 import { db } from "../firebaseConfig";
@@ -34,7 +34,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import * as XLSX from "xlsx";
 
 const docCount = ref(0);
-const surveyCollectionRef = collection(db, "REF");
+const surveyCollectionRef = collection(db, "Poitiers");
 const level = ref(0);
 const startDate = ref('');
 const ENQUETEUR = ref('');
@@ -132,7 +132,7 @@ const downloadData = async () => {
 		const workbook = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(workbook, worksheet, "Data"); ``
 		// Export the workbook to a .xlsx file
-		XLSX.writeFile(workbook, "Autocar.xlsx");
+		XLSX.writeFile(workbook, "Poitiers.xlsx");
 	} catch (error) {
 		console.error("Error downloading data: ", error);
 	}
