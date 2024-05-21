@@ -1,7 +1,7 @@
 <template>
 
 	<div id="" v-if="level === 0">
-		<h1> {{TEXT}} </h1>
+		<h2> {{TEXT}} </h2>
 		<select v-model="VAR" class="form-control">
 			<option v-for="option in IMPORT" :key="option.id" :value="option.output">
 				{{ option.text }}
