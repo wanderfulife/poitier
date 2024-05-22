@@ -129,7 +129,7 @@
 		</div>
 
 		<div id="q4"
-			v-if="(level === 5 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 6 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 5 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 6 && Q1 === 1 && Q3 < 8)">
 			<h2>Par où avez-vous/allez-vous accéder aux quais pour prendre votre train ?</h2>
 			<select v-model="Q4" class="form-control">
 				<option v-for="option in accesQuai" :key="option.id" :value="option.output">
@@ -141,7 +141,7 @@
 		</div>
 
 		<div id="q5"
-			v-if="(level === 6 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 7 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 6 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 7 && Q1 === 1 && Q3 < 8)">
 			<h2>Pour ce trajet en train, quelle sera votre gare de descente ? </h2>
 			<h2>Précisez que l’on demande la gare de descente même si celle-ci sera une gare de correspondance vers
 				la destination finale.</h2>
@@ -157,7 +157,7 @@
 		</div>
 
 		<div id="q6"
-			v-if="(level === 7 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 8 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 7 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 8 && Q1 === 1 && Q3 < 8)">
 			<h2>Quel est le motif de votre déplacement?</h2>
 			<select v-model="Q6" class="form-control">
 				<option v-for="option in motif" :key="option.id" :value="option.output">
@@ -170,7 +170,7 @@
 		</div>
 
 		<div id="q6a"
-			v-if="(level === 8 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 9 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 8 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 9 && Q1 === 1 && Q3 < 8)">
 			<h2>Quel était la raison de votre venue à Poitiers ?</h2>
 			<select v-model="Q6a" class="form-control">
 				<option v-for="option in raisonVenue" :key="option.id" :value="option.output">
@@ -183,7 +183,7 @@
 		</div>
 
 		<div id="q7"
-			v-if="(level === 9 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 10 && Q1 === 1 && Q3 < 8)">
+			v-if="(level === 9 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 10 && Q1 === 1 && Q3 < 8)">
 			<h2>A quelle fréquence réalisez-vous ce déplacement en train?</h2>
 			<select v-model="Q7" class="form-control">
 				<option v-for="option in frequence" :key="option.id" :value="option.output">
@@ -195,7 +195,7 @@
 		</div>
 
 		<div id="q8"
-			v-if="(level === 10 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 11 && Q1 === 1 && Q3 < 8) || (level === 5 && Q1 > 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 6 && Q1 > 2 && Q3 < 8)">
+			v-if="(level === 10 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 11 && Q1 === 1 && Q3 < 8) || (level === 5 && Q1 > 2 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 6 && Q1 > 2 && Q3 < 8)">
 			<h2>Quel âge avez-vous ?</h2>
 			<select v-model="Q8" class="form-control">
 				<option v-for="option in age" :key="option.id" :value="option.output">
@@ -207,7 +207,7 @@
 		</div>
 
 		<div id="q9"
-			v-if="(level === 11 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 12 && Q1 === 1 && Q3 < 8) || (level === 6 && Q1 > 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 7 && Q1 > 2 && Q3 < 8)">
+			v-if="(level === 11 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 12 && Q1 === 1 && Q3 < 8) || (level === 6 && Q1 > 2 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 7 && Q1 > 2 && Q3 < 8)">
 			<h3>Selon vous, que faudrait-il faire en priorité pour améliorer les conditions d’accès à cette gare ?</h3>
 			<h2>Si besoin orienter vers :<br>
 				1: Sentiment des voyageurs sur les différentes infrastructures (souterrains, passerelle, quais…)<br>
@@ -219,7 +219,7 @@
 		</div>
 
 		<div id="fin"
-			v-if="level === 3 && Q1 === 2 || (level === 12 && Q1 === 1 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 13 && Q1 === 1 && Q3 < 8) || (level === 7 && Q1 > 2 && (Q3 === 8 || Q3 === 9 && Q3 === 10)) || (level === 8 && Q1 > 2 && Q3 < 8)">
+			v-if="level === 3 && Q1 === 2 || (level === 12 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 13 && Q1 === 1 && Q3 < 8) || (level === 7 && Q1 > 2 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 8 && Q1 > 2 && Q3 < 8)">
 			<h2>Merci pour votre réponse et bon voyage.</h2>
 			<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
 			<button @click="back" class="btn-return">retour</button>
