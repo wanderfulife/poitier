@@ -289,6 +289,7 @@ const gare = [
 		{id: 62,output: 62,text: "Vendôme-Villiers-Sur-Loir TGV"},
 		{id: 63,output: 63,text: "Villeperdue"},
 		{id: 64,output: 64,text: "Vivonne"},
+		{id: 65,output: 65,text: "Autre gare : préciser : _________"},
 ];
 
 		

@@ -152,9 +152,12 @@
 					{{ option.text }}
 				</option>
 			</select>
+			<input v-if="Q5 === 65" class="form-control" type="text" v-model="Q5_DETAIL"
+				placeholder="Precisions">
 			<button v-if="Q5" @click="next" class="btn-next">Suivant</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
+
 
 		<div id="q6"
 			v-if="(level === 7 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 8 && Q1 === 1 && Q3 < 8)">
@@ -218,6 +221,8 @@
 			<button @click="back" class="btn-return">retour</button>
 		</div>
 
+
+
 		<div id="fin"
 			v-if="level === 3 && Q1 === 2 || (level === 12 && Q1 === 1 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 13 && Q1 === 1 && Q3 < 8) || (level === 7 && Q1 > 2 && (Q3 === 8 || Q3 === 9 || Q3 === 10)) || (level === 8 && Q1 > 2 && Q3 < 8)">
 			<h2>Merci pour votre réponse et bon voyage.</h2>
@@ -267,6 +272,7 @@ const Q3e = ref('');
 const Q3e_DETAIL = ref('');
 const Q4 = ref('');
 const Q5 = ref('');
+const Q5_DETAIL = ref('');
 const Q6 = ref('');
 const Q6_DETAIL = ref('');
 const Q6a = ref('');
@@ -330,6 +336,7 @@ const submitSurvey = async () => {
 		Q3e_DETAIL: Q3e_DETAIL.value,
 		Q4: Q4.value,
 		Q5: Q5.value,
+		Q5_DETAIL: Q5_DETAIL.value,
 		Q6: Q6.value,
 		Q6_DETAIL: Q6_DETAIL.value,
 		Q6a: Q6a.value,
@@ -360,6 +367,7 @@ const submitSurvey = async () => {
 	Q3e_DETAIL.value = "";
 	Q4.value = "";
 	Q5.value = "";
+	Q5_DETAIL.value = "";
 	Q6.value = "";
 	Q6_DETAIL.value = "";
 	Q6a.value = "";
@@ -404,6 +412,7 @@ const downloadData = async () => {
 			Q3e_DETAIL: "Q3e_DETAIL",
 			Q4: "Q4",
 			Q5: "Q5",
+			Q5_DETAIL: "Q5_DETAIL",
 			Q6: "Q6",
 			Q6_DETAIL: "Q6_DETAIL",
 			Q6a: "Q6a",
@@ -446,6 +455,7 @@ const downloadData = async () => {
 				Q3e_DETAIL: docData.Q3e_DETAIL || "",
 				Q4: docData.Q4 || "",
 				Q5: docData.Q5 || "",
+				Q5_DETAIL: docData.Q5_DETAIL || "",
 				Q6: docData.Q6 || "",
 				Q6_DETAIL: docData.Q6_DETAIL || "",
 				Q6a: docData.Q6a || "",
